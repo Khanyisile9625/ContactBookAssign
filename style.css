@@ -1,0 +1,112 @@
+/* Simple, neat styling for Contact Book */
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f8fafc;
+    margin: 0;
+    padding: 0;
+    color: #222;
+}
+
+.container, #controls, #table, #contactCount, #errorMsg {
+    max-width: 600px;
+    margin: 24px auto;
+}
+
+#controls {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+button, input[type="submit"] {
+    background: #2a4d69;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+button:hover, input[type="submit"]:hover {
+    background: #1e3550;
+}
+
+form {
+    background: #fff;
+    padding: 18px 16px;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+label {
+    font-weight: 500;
+    margin-bottom: 2px;
+}
+
+input, select {
+    padding: 8px;
+    border: 1px solid #bfc9d1;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+#table table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+#table th, #table td {
+    padding: 10px 8px;
+    text-align: left;
+}
+
+#table th {
+    background: #e9eef6;
+    font-weight: 600;
+}
+
+#table tr:nth-child(even) {
+    background: #f4f6fb;
+}
+
+#table tr:hover {
+    background: #e0e7ef;
+}
+
+.avatar {
+    border-radius: 50%;
+    border: 1px solid #bfc9d1;
+    background: #fff;
+}
+
+#errorMsg {
+    color: #d32f2f;
+    margin-top: 10px;
+}
+
+#contactCount {
+    margin-top: 10px;
+    font-size: 1rem;
+    color: #2a4d69;
+}
+
+@media (max-width: 700px) {
+    .container, #controls, #table, #contactCount, #errorMsg {
+        max-width: 98vw;
+        padding: 0 2vw;
+    }
+    #table table, #table th, #table td {
+        font-size: 0.95rem;
+    }
+}

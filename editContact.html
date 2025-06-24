@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Edit Contact</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="container">
+        <h1>Edit Contact</h1>
+        <form id="editForm" autocomplete="off">
+            <label for="firstname">First Name:</label>
+            <input type="text" name="firstname" id="firstname" required>
+            <label for="lastname">Last Name:</label>
+            <input type="text" name="lastname" id="lastname" required>
+            <label for="mobile">Mobile:</label>
+            <input type="tel" name="mobile" id="mobile" required>
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" required>
+            <label for="avatar">Avatar (optional):</label>
+            <input type="file" name="avatar" id="avatar" accept="image/*">
+            <div id="currentAvatar" style="margin:10px 0;"></div>
+            <button type="submit" id="submitForm">Save Changes</button>
+        </form>
+        <button id="homeLink" type="button" style="margin-top:10px;">Home</button>
+        <div id="errorMsg" role="alert"></div>
+    </div>
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // Simple logic for loading and submitting the contact
+        document.addEventListener('DOMContentLoaded', function () {
+            const params = new URLSearchParams(window.location.search);
+            const contactId = params.get('id');
+            if (!contactId) {
+                document.getElementById('errorMsg').textContent = "No contact ID provided.";
+                document.getElementById('editForm').style.display = "none";
+                return;
+            }
+
+            // Fetch contact details
+            fetch(rootPath + "controller/get-contact/?id=" + encodeURIComponent(contactId) + "&apiKey=" + encodeURIComponent(apiKey))
+                .then(response => {
+                    if (!response.ok) throw new Error("Failed to load contact.");
+                    return response.json();
+                })
+                .then(contact => {
+                    document.getElementById('firstname').value = contact.firstname || "";
+                    document.getElementById('lastname').value = contact.lastname || "";
+                    document.getElementById('mobile').value = contact.mobile || "";
+                    document.getElementById('email').value = contact.email || "";
+                    if (contact.avatar) {
+                        document.getElementById('currentAvatar').innerHTML =
+                            `<img src="${rootPath}controller/uploads/${contact.avatar}" class="avatar" width="60" alt="Current Avatar" onerror="this.style.display='none';"><br><small>Current Avatar</small>`;
+                    }
+                })
+                .catch(error => {
+                    document.getElementById('errorMsg').textContent = "Failed to load contact.";
+                    document.getElementById('editForm').style.display = "none";
+                                });
+                        });
+                    </script>
+                </body>
+                </html>
+
+            // Handle form submission
+            document.getElementById('editForm').addEventListener('submit', function (e) {
+                e.preventDefault();
+                const form = new FormData();
+                form.append('id', contactId);
+                form.append('firstname', document.getElementById('firstname').value);
+                form.append('lastname', document.getElementById('lastname').value);
+                form.append('mobile', document.getElementById('mobile').value);
+                form.append('email', document.getElementById('email').value);
+                form.append('apiKey', apiKey);
+                if (document.getElementById('avatar').files[0]) {
+                    form.append('avatar', document.getElementById('avatar').files[0]);
+                }
+
+                document.getElementById('errorMsg').textContent = "Saving...";
+                fetch(rootPath + "controller/update-contact/", {
+                    method: "POST",
+                    body: form
+                })
+                .then(response => {
+                    if (!response.ok) throw new Error("Failed to update contact.");
+                    return response.json();
+                })
+                .then(result => {
+                    if (result.success) {
+                        window.location.href = "index.html";
+                    } else {
+                        document.getElementById('errorMsg').textContent = result.message || "Failed to update contact.";
+                    }
+                })
+                .catch(error => {
+                    document.getElementById('errorMsg').textContent = "Failed to update contact.";
+                });

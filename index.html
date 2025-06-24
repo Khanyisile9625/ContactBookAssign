@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Contact Book</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="container">
+        <h1>Contact Book</h1>
+        <div id="controls">
+            <button id="refresh" type="button" aria-label="Refresh contacts">Refresh</button>
+            <button id="addContact" type="button" aria-label="Add new contact">Add Contact</button>
+        </div>
+        <div id="table" aria-label="Contacts table">Contact loading...</div>
+        <div id="contactCount"></div>
+        <div id="errorMsg" role="alert"></div>
+    </div>
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

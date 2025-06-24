@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Enter API Key</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="container">
+        <h1>Enter API Key</h1>
+        <form id="apiKeyForm" autocomplete="off">
+            <label for="apiKey">API Key:</label>
+            <input type="text" id="apiKey" name="apiKey" required />
+            <button id="submitApiKey" type="submit">Submit</button>
+        </form>
+        <div id="errorMsg" role="alert"></div>
+    </div>
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

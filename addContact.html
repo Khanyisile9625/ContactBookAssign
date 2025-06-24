@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Add Contact</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="api-root" content="https://mysite.itvarsity.org/api/ContactBook/" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="container">
+        <h1>Add Contact</h1>
+        <form id="addForm" autocomplete="off">
+            <label for="firstname">First Name:</label>
+            <input type="text" name="firstname" id="firstname" required>
+            <label for="lastname">Last Name:</label>
+            <input type="text" name="lastname" id="lastname" required>
+            <label for="mobile">Mobile:</label>
+            <input type="tel" name="mobile" id="mobile" required>
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" required>
+            <label for="avatar">Avatar (optional):</label>
+            <input type="file" name="avatar" id="avatar" accept="image/*">
+            <button type="submit" id="submitForm">Submit</button>
+        </form>
+        <button id="homeLink" type="button" style="margin-top:10px;">Home</button>
+        <div id="errorMsg" role="alert"></div>
+    </div>
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
